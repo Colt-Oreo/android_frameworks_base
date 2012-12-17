@@ -67,6 +67,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
     private SignalClusterView mSignalClusterView;
 
     private View mColtLogo;
+    private LinearLayout mCenterClockLayout;
     private boolean mShowLogo;
 	private View mCustomCarrierLabel;
 	private int mShowCarrierLabel;
@@ -126,6 +127,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         Dependency.get(StatusBarIconController.class).addIconGroup(mDarkIconManager);
         mSystemIconArea = mStatusBar.findViewById(R.id.system_icon_area);
         mSignalClusterView = mStatusBar.findViewById(R.id.signal_cluster);
+        mCenterClockLayout = (LinearLayout) mStatusBar.findViewById(R.id.center_clock_layout);
         Dependency.get(DarkIconDispatcher.class).addDarkReceiver(mSignalClusterView);
 		mColtLogo = mStatusBar.findViewById(R.id.status_bar_logo);
 		mCustomCarrierLabel = mStatusBar.findViewById(R.id.statusbar_carrier_text);
@@ -231,16 +233,19 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
 
     public void hideSystemIconArea(boolean animate) {
         animateHide(mSystemIconArea, animate, true);
+        animateHide(mCenterClockLayout, animate, true);
     }
 
     public void showSystemIconArea(boolean animate) {
         animateShow(mSystemIconArea, animate);
+        animateShow(mCenterClockLayout, animate);
     }
 
     public void hideNotificationIconArea(boolean animate) {
         animateHide(mNotificationIconAreaInner, animate, true);
 		if (mShowLogo) {
 			animateHide(mColtLogo, animate, true);
+			animateHide(mCenterClockLayout, animate, true);
 		}
     }
 
@@ -248,9 +253,10 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         animateShow(mNotificationIconAreaInner, animate);
 		if (mShowLogo) {
 			animateShow(mColtLogo, animate);
+			animateShow(mCenterClockLayout, animate);
 		}
     }
-	
+
 	public void hideCarrierName(boolean animate) {
         if (mCustomCarrierLabel != null) {
             animateHide(mCustomCarrierLabel, animate, true);
