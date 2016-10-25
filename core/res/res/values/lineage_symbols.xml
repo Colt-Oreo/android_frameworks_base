@@ -67,4 +67,7 @@
     <java-symbol type="string" name="config_rat_3g" />
     <java-symbol type="string" name="config_rat_4g" />
 
+    <!-- Notify fingerprint client of successful cancelled authentication -->
+    <java-symbol type="bool" name="config_notifyClientOnFingerprintCancelSuccess" />
+
 </resources>
