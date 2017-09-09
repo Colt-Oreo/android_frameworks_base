@@ -301,7 +301,7 @@
                   android:theme="@style/ExTunerSettings"
                   android:label="@string/nav_bar"
                   android:process=":tuner"
-                  android:parentActivityName="com.nitrogen.settings.fragments.NavbarSettings"
+                  android:parentActivityName="com.colt.settings.fragments.NavbarSettings"
                   android:exported="true">
         </activity>
 
@@ -309,7 +309,7 @@
                   android:theme="@style/ExTunerSettings"
                   android:label="@string/tuner_lock_screen"
                   android:process=":tuner"
-                  android:parentActivityName="com.nitrogen.settings.fragments.LockScreenSettings"
+                  android:parentActivityName="com.colt.settings.fragments.LockScreenSettings"
                   android:exported="true">
         </activity>
 
