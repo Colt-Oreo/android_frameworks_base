@@ -4146,6 +4146,12 @@ public final class Settings {
         public static final String QS_LAYOUT_ROWS = "qs_layout_rows";
 
         /**
+         * Whether to enable scrolling in the small quick settings
+         * @hide
+         */
+        public static final String QS_QUICKBAR_SCROLL_ENABLED = "qs_quickbar_scroll_enabled";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -4316,6 +4322,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(QS_LAYOUT_COLUMNS_LANDSCAPE);
             PRIVATE_SETTINGS.add(QS_TILE_TITLE_VISIBILITY);
             PRIVATE_SETTINGS.add(QS_LAYOUT_ROWS);
+            PRIVATE_SETTINGS.add(QS_QUICKBAR_SCROLL_ENABLED);
         }
 
         /**
