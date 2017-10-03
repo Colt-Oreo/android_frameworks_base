@@ -4053,6 +4053,11 @@ public final class Settings {
          *
          * @hide
          */
+        public static final String SHOW_BATTERY_IMAGE = "status_bar_show_battery_image";
+
+        /**
+         * @hide
+         */
         public static final String BATTERY_SAVER_MODE_COLOR = "battery_save_mode_color";
 
         /**

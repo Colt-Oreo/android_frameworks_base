@@ -23,6 +23,12 @@
         android:title="@string/status_bar"
         android:fragment="com.android.systemui.tuner.StatusBarTuner" />
 
+        <!-- other weird signal stuff -->
+
+        <com.android.systemui.tuner.StatusBarSwitch
+            android:key="battery"
+            android:title="@string/battery" />
+
     <PreferenceScreen
         android:key="volume_and_do_not_disturb"
         android:title="@string/volume_and_do_not_disturb">
