@@ -714,6 +714,7 @@ public class TaskViewHeader extends FrameLayout
                 // Keep track of deletions by the dismiss button
                 MetricsLogger.histogram(getContext(), "overview_task_dismissed_source",
                         Constants.Metrics.DismissSourceHeaderButton);
+            }
         } else if (v == mKillButton) {
             TaskView tv = Utilities.findParent(this, TaskView.class);
             if (killTask()) {
