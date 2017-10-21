@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-     Copyright (C) 2017 The LiquidRemix Project
+<!-- Copyright (C) 2006 The Android Open Source Project
+        Copyright (C) 2017 The ABC rom
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -14,9 +14,11 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
+
 <resources>
-
-    <!-- Keyguard weather colors -->
-    <color name="keyguard_default_primary_text_color">#ffffffff</color>
-
+    <!-- Slim recent app screen animation -->
+    <style name="Animation.SlimRecentScreen">
+        <item name="android:windowEnterAnimation">@anim/recent_enter</item>
+        <item name="android:windowExitAnimation">@anim/recent_exit</item>
+    </style>
 </resources>
