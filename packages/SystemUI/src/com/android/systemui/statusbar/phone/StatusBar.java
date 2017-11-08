@@ -6374,8 +6374,8 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.QS_FOOTER_WARNINGS),
                     false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
-                  Settings.System.STATUS_BAR_SHOW_TICKER),
-                  false, this, UserHandle.USER_ALL);
+                    Settings.System.STATUS_BAR_SHOW_TICKER),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
