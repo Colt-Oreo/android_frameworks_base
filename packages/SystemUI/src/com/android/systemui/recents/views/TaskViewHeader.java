@@ -272,7 +272,6 @@ public class TaskViewHeader extends FrameLayout
         mTitleView = (TextView) findViewById(R.id.title);
         mDismissButton = (ImageView) findViewById(R.id.dismiss_task);
         mLockTaskButton = (ImageView) findViewById(R.id.lock_task);
-        mKillButton = findViewById(R.id.kill_app);
         if (ssp.hasFreeformWorkspaceSupport()) {
             mMoveTaskButton = findViewById(R.id.move_task);
         }
@@ -359,10 +358,10 @@ public class TaskViewHeader extends FrameLayout
         if (headerBarHeight != mHeaderBarHeight || headerButtonPadding != mHeaderButtonPadding) {
             mHeaderBarHeight = headerBarHeight;
             mHeaderButtonPadding = headerButtonPadding;
-            updateLayoutParams(mIconView, mTitleView, mLockTaskButton, mMoveTaskButton, mKillButton,
+            updateLayoutParams(mIconView, mTitleView, mLockTaskButton, null, mMoveTaskButton,
                     mDismissButton);
             if (mAppOverlayView != null) {
-                updateLayoutParams(mAppIconView, mAppTitleView, null, null, mAppInfoView);
+                updateLayoutParams(mAppIconView, mAppTitleView, null, null, mKillButton, mAppInfoView);
             }
         }
     }
@@ -410,7 +409,6 @@ public class TaskViewHeader extends FrameLayout
         mDismissButton.setVisibility(showDismissIcon ? View.VISIBLE : View.INVISIBLE);
         mDismissButton.setTranslationX(rightInset);
         mLockTaskButton.setVisibility(showDismissIcon ? View.VISIBLE : View.INVISIBLE);
-        mKillButton.setVisibility(showDismissIcon ? View.VISIBLE : View.INVISIBLE);
 
         setLeftTopRightBottom(0, 0, width, getMeasuredHeight());
     }
@@ -550,11 +548,6 @@ public class TaskViewHeader extends FrameLayout
         mLockTaskButton.setClickable(false);
         ((RippleDrawable) mLockTaskButton.getBackground()).setForceSoftware(true);
 
-        mKillButton.setImageDrawable(t.useLightOnPrimaryColor ?
-                mLightKillDrawable : mDarkKillDrawable);
-        mKillButton.setOnClickListener(this);
-        mKillButton.setClickable(false);
-        ((RippleDrawable) mKillButton.getBackground()).setForceSoftware(true);
         // When freeform workspaces are enabled, then update the move-task button depending on the
         // current task
         if (mMoveTaskButton != null) {
@@ -638,17 +631,6 @@ public class TaskViewHeader extends FrameLayout
         } else {
             mDismissButton.setAlpha(1f);
         }
-        mKillButton.setVisibility(View.VISIBLE);
-        mKillButton.setClickable(true);
-        if (mKillButton.getVisibility() == VISIBLE) {
-            mKillButton.animate()
-                    .alpha(1f)
-                    .setInterpolator(Interpolators.FAST_OUT_LINEAR_IN)
-                    .setDuration(duration)
-                    .start();
-        } else {
-            mKillButton.setAlpha(1f);
-        }
         mLockTaskButton.setVisibility(View.VISIBLE);
         mLockTaskButton.setClickable(true);
         if (mLockTaskButton.getVisibility() == VISIBLE) {
@@ -688,10 +670,6 @@ public class TaskViewHeader extends FrameLayout
         mLockTaskButton.animate().cancel();
         mLockTaskButton.setAlpha(1f);
         mLockTaskButton.setClickable(true);
-        mKillButton.setVisibility(View.VISIBLE);
-        mKillButton.animate().cancel();
-        mKillButton.setAlpha(1f);
-        mKillButton.setClickable(true);
         if (mMoveTaskButton != null) {
             mMoveTaskButton.setVisibility(View.VISIBLE);
             mMoveTaskButton.animate().cancel();
@@ -711,9 +689,6 @@ public class TaskViewHeader extends FrameLayout
         mLockTaskButton.setVisibility(View.INVISIBLE);
         mLockTaskButton.setAlpha(0f);
         mLockTaskButton.setClickable(false);
-        mKillButton.setVisibility(View.INVISIBLE);
-        mKillButton.setAlpha(0f);
-        mKillButton.setClickable(false);
         if (mMoveTaskButton != null) {
             mMoveTaskButton.setVisibility(View.INVISIBLE);
             mMoveTaskButton.setAlpha(0f);
@@ -822,7 +797,7 @@ public class TaskViewHeader extends FrameLayout
             mAppInfoView = (ImageView) mAppOverlayView.findViewById(R.id.app_info);
             mAppInfoView.setOnClickListener(this);
             mAppTitleView = (TextView) mAppOverlayView.findViewById(R.id.app_title);
-            updateLayoutParams(mAppIconView, mAppTitleView, null, null, mAppInfoView);
+            updateLayoutParams(mAppIconView, mAppTitleView, null, null, mKillButton, mAppInfoView);
         }
 
         // Update the overlay contents for the current app
@@ -840,6 +815,12 @@ public class TaskViewHeader extends FrameLayout
             icon = ssp.getBadgedApplicationIcon(activityInfo.applicationInfo, userId);
         }
         mAppIconView.setImageDrawable(icon);
+
+        mKillButton.setImageDrawable(mTask.useLightOnPrimaryColor
+                ? mLightKillDrawable
+                : mDarkKillDrawable);
+        mAppOverlayView.setVisibility(View.VISIBLE);
+
         mAppInfoView.setImageDrawable(mTask.useLightOnPrimaryColor
                 ? mLightInfoIcon
                 : mDarkInfoIcon);
