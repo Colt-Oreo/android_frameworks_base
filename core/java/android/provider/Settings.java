@@ -3950,6 +3950,15 @@ public final class Settings {
          * the setting value. See an example above.
          */
 
+ 	 /**
+         * 0 - wallpaper based
+          * 1 - force light
+          * 2 - force dark
+          * @hide
+          */
+         public static final String SYSTEM_THEME_STYLE = "system_theme_style";
+
+
         /**
           * Volume keys control cursor in text fields (default is 0)
           * 0 - Disabled
@@ -4125,7 +4134,9 @@ public final class Settings {
             PRIVATE_SETTINGS.add(LOCK_TO_APP_ENABLED);
             PRIVATE_SETTINGS.add(EGG_MODE);
             PRIVATE_SETTINGS.add(SHOW_BATTERY_PERCENT);
-        }
+	    PRIVATE_SETTINGS.add(SYSTEM_THEME_STYLE);
+
+	}
 
         /**
          * These are all public system settings
