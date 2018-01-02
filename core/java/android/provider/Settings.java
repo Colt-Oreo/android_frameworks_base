@@ -3948,14 +3948,13 @@ public final class Settings {
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate
          * the setting value. See an example above.
+         * 0 - wallpaper based
+         * 1 - force light
+         * 2 - force dark
+         * 3 - force black
+         * @hide
          */
 
- 	 /**
-         * 0 - wallpaper based
-          * 1 - force light
-          * 2 - force dark
-          * @hide
-          */
          public static final String SYSTEM_THEME_STYLE = "system_theme_style";
 
 
