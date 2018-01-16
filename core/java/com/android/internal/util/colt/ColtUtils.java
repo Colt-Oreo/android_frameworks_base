@@ -33,9 +33,13 @@ import android.view.IWindowManager;
 import android.view.WindowManagerGlobal;
 import android.app.ActivityManager;
 import android.content.pm.ActivityInfo;
-import java.util.List;
+
+import android.content.res.Resources;
 
 import com.android.internal.statusbar.IStatusBarService;
+
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Some custom utilities
@@ -132,5 +136,10 @@ public class ColtUtils {
                 }
             }
         }
+    }
+
+    public static boolean isChineseLanguage() {
+       return Resources.getSystem().getConfiguration().locale.getLanguage().startsWith(
+               Locale.CHINESE.getLanguage());
     }
 }

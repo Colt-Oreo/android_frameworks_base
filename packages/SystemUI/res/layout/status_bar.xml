@@ -48,6 +48,15 @@
         android:paddingEnd="8dp"
         android:orientation="horizontal"
         >
+		
+		<com.android.systemui.colt.carrierlabel.CarrierLabel
+            android:id="@+id/statusbar_carrier_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textAppearance="@style/TextAppearance.StatusBar.CarrierLabel"
+            android:visibility="gone"
+            android:singleLine="true"/>
 
 		<ImageView
             android:id="@+id/status_bar_logo"

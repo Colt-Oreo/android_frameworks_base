@@ -68,6 +68,8 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
 
     private View mColtLogo;
     private boolean mShowLogo;
+	private View mCustomCarrierLabel;
+	private int mShowCarrierLabel;
     private final Handler mHandler = new Handler();
 
     private class ColtSettingsObserver extends ContentObserver {
@@ -79,6 +81,9 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_LOGO),
                     false, this, UserHandle.USER_ALL);
+			getContext().getContentResolver().registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_SHOW_CARRIER),
+                    false, this, UserHandle.USER_ALL);		  
         }
 
         @Override
@@ -123,6 +128,7 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         mSignalClusterView = mStatusBar.findViewById(R.id.signal_cluster);
         Dependency.get(DarkIconDispatcher.class).addDarkReceiver(mSignalClusterView);
 		mColtLogo = mStatusBar.findViewById(R.id.status_bar_logo);
+		mCustomCarrierLabel = mStatusBar.findViewById(R.id.statusbar_carrier_text);
 		updateSettings(false);
         // Default to showing until we know otherwise.
         showSystemIconArea(false);
@@ -187,8 +193,10 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
         if ((diff1 & DISABLE_NOTIFICATION_ICONS) != 0) {
             if ((state1 & DISABLE_NOTIFICATION_ICONS) != 0) {
                 hideNotificationIconArea(animate);
+				hideCarrierName(animate);
             } else {
                 showNotificationIconArea(animate);
+				showCarrierName(animate);
             }
         }
     }
@@ -241,6 +249,18 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
 		if (mShowLogo) {
 			animateShow(mColtLogo, animate);
 		}
+    }
+	
+	public void hideCarrierName(boolean animate) {
+        if (mCustomCarrierLabel != null) {
+            animateHide(mCustomCarrierLabel, animate, true);
+        }
+    }
+
+    public void showCarrierName(boolean animate) {
+        if (mCustomCarrierLabel != null) {
+            setCarrierLabel(animate);
+        }
     }
 
     /**
@@ -310,6 +330,9 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
             mShowLogo = Settings.System.getIntForUser(
                 getContext().getContentResolver(), Settings.System.STATUS_BAR_LOGO, 0,
                 UserHandle.USER_CURRENT) == 1;
+			mShowCarrierLabel = Settings.System.getIntForUser(
+                getContext().getContentResolver(), Settings.System.STATUS_BAR_SHOW_CARRIER, 1,
+                UserHandle.USER_CURRENT);
             if (mNotificationIconAreaInner != null) {
                 if (mShowLogo) {
                     if (mNotificationIconAreaInner.getVisibility() == View.VISIBLE) {
@@ -320,8 +343,16 @@ public class CollapsedStatusBarFragment extends Fragment implements CommandQueue
                 }
             }
         } catch (Exception e) {
+			setCarrierLabel(animate);
             // never ever crash here
             Slog.e(TAG, "updateSettings(animate)", e);
+        }
+	}
+		private void setCarrierLabel(boolean animate) {
+        if (mShowCarrierLabel == 2 || mShowCarrierLabel == 3) {
+            animateShow(mCustomCarrierLabel, animate);
+        } else {
+            animateHide(mCustomCarrierLabel, animate, false);
         }
     }
 }
