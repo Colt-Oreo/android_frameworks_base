@@ -294,6 +294,15 @@ public final class InputDevice implements Parcelable {
     public static final int SOURCE_JOYSTICK = 0x01000000 | SOURCE_CLASS_JOYSTICK;
 
     /**
+      * The input source is a specific virtual event sent from navigation bar.
+      *
+      * @see com.android.systemui.statusbar.policy.KeyButtonView#sendEvent()
+      * @author Carlo Savignano
+      * @hide
+     */
+    public static final int SOURCE_NAVIGATION_BAR = 0x04000000 | SOURCE_CLASS_BUTTON;
+
+    /**
      * The input source is a device connected through HDMI-based bus.
      *
      * The key comes in through HDMI-CEC or MHL signal line, and is treated as if it were
