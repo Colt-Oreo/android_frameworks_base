@@ -1031,7 +1031,7 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         mSettingsObserver.onChange(false); // set up
         mColtSettingsObserver.observe();
-        mColtSettingsObserver.update();
+        mColtSettingsObserver.updatenow();
         mCommandQueue.disable(switches[0], switches[6], false /* animate */);
         setSystemUiVisibility(switches[1], switches[7], switches[8], 0xffffffff,
                 fullscreenStackBounds, dockedStackBounds);
@@ -6414,7 +6414,6 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         @Override
         public void onChange(boolean selfChange, Uri uri) {
-		super.onChange(selfChange, uri);
             if (uri.equals(Settings.System.getUriFor(
                     Settings.System.QS_FOOTER_WARNINGS))) {
                 setQsPanelOptions();
@@ -6429,10 +6428,13 @@ public class StatusBar extends SystemUI implements DemoMode,
                     Settings.System.USE_SLIM_RECENTS))) {
                 updateRecentsMode();
             }
-                update();
         }
 
-        public void update() {
+        @Override
+            public void onChange(boolean selfChange) {
+        }
+
+        public void updatenow() {
             updateTheme();
             setBatterySaverWarning();
             setQsPanelOptions();

@@ -4260,6 +4260,12 @@ public final class Settings {
          */
         public static final String  RECENTS_CLEAR_ALL_LOCATION = "recents_clear_all_location";
 
+       /**
+ 	 * Whether to display VoLTE icon when VoLTE present
+         * @hide
+         */
+        public static final String STATUS_BAR_VOLTE = "status_bar_volte";
+
         /**
          * Show or hide clock
          * 0 - hide

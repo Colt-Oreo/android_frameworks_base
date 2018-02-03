@@ -17,8 +17,6 @@
  */
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-<!-- volte icon switch -->
-    <string name="status_bar_volte">VOLTE</string>
 
     <string name="statusbar_items_title">Statusbar icon</string>
 
