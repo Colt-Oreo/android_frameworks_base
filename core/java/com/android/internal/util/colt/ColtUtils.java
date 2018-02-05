@@ -19,6 +19,7 @@ package com.android.internal.util.colt;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ApplicationInfo;
 import android.hardware.input.InputManager;
 import android.os.Handler;
 import android.os.Looper;
@@ -33,6 +34,7 @@ import android.view.IWindowManager;
 import android.view.WindowManagerGlobal;
 import android.app.ActivityManager;
 import android.content.pm.ActivityInfo;
+import android.util.Log;
 
 import android.content.res.Resources;
 
@@ -45,6 +47,8 @@ import java.util.Locale;
  * Some custom utilities
  */
 public class ColtUtils {
+
+    private static final String TAG = "ColtUtils";
 
     public static final String INTENT_SCREENSHOT = "action_take_screenshot";
     public static final String INTENT_REGION_SCREENSHOT = "action_take_region_screenshot";
@@ -87,6 +91,31 @@ public class ColtUtils {
                         InputManager.INJECT_INPUT_EVENT_MODE_ASYNC);
             }
         }, 20);
+    }
+
+
+   /**
+     * Checks if a specific package is installed.
+     *
+     * @param context     The context to retrieve the package manager
+     * @param packageName The name of the package
+     * @return Whether the package is installed or not.
+     */
+    public static boolean isPackageInstalled(Context context, String packageName) {
+        PackageManager pm = context.getPackageManager();
+        try {
+            if (pm != null) {
+                List<ApplicationInfo> packages = pm.getInstalledApplications(0);
+                for (ApplicationInfo packageInfo : packages) {
+                    if (packageInfo.packageName.equals(packageName)) {
+                        return true;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            Log.e(TAG, "Error: " + e.getMessage());
+        }
+        return false;
     }
 
     public static ActivityInfo getRunningActivityInfo(Context context) {
